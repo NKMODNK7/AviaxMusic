@@ -12,13 +12,6 @@ from AviaxMusic.utils.database import (
 )
 
 
-@app.on_message(filters.command(["ac"]) & SUDOERS)
-async def active_vc(_, message: Message):
-    achats = len(await get_active_chats())
-    vchats = len(await get_active_video_chats())
-    await message.reply_text(f"<b>» ᴀᴄᴛɪᴠᴇ ᴠᴏɪᴄᴇ ᴄʜᴀᴛs:</b>\n\nᴠᴏɪᴄᴇ: {achats}\nᴠɪᴅᴇᴏ: {vchats}")
-
-
 @app.on_message(filters.command(["activevc", "activevoice"]) & SUDOERS)
 async def activevc(_, message: Message):
     mystic = await message.reply_text("» ɢᴇᴛᴛɪɴɢ ᴀᴄᴛɪᴠᴇ ᴠᴏɪᴄᴇ ᴄʜᴀᴛs ʟɪsᴛ...")
