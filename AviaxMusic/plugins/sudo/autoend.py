@@ -42,3 +42,4 @@ async def auto_leave_chat(_, message: Message):
     else:
         await message.reply_text(usage)
         
+
