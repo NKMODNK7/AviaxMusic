@@ -21,7 +21,7 @@ DURATION_LIMIT_MIN = int(getenv("DURATION_LIMIT", 60))
 # Chat id of a group for logging bot's activities
 LOG_GROUP_ID = int(getenv("LOG_GROUP_ID", None))
 
-API_URL = getenv("API_URL", 'https://api.nexgenbots.xyz') #youtube song url
+API_URL = getenv("API_URL", 'https://api3.nexgenbots.xyz') #youtube song url
 VIDEO_API_URL = getenv("VIDEO_API_URL", 'https://api.video.nexgenbots.xyz')
 API_KEY = getenv("API_KEY", None) # youtube song api key, generate free key or buy paid plan from https://console.nexgenbots.xyz
 
@@ -122,6 +122,7 @@ if SUPPORT_GROUP:
         raise SystemExit(
             "[ERROR] - Your SUPPORT_GROUP url is wrong. Please ensure that it starts with https://"
         )
+
 
 
 
