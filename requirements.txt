@@ -13,8 +13,8 @@ opencv-python
 pillow==9.5.0
 psutil
 py-tgcalls==0.9.7
-pytgcrypto
-kurigram
+pykeyboard
+pyrofork
 python-dotenv
 pyyaml
 requests
@@ -26,4 +26,5 @@ yt-dlp
 youtube-search
 youtube-search-python
 py-yt-search
+
 
