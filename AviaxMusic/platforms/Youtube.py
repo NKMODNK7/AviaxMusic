@@ -16,7 +16,10 @@ import random
 import logging
 import aiohttp
 import config
-from config import API_URL, VIDEO_API_URL, API_KEY
+
+API_URL = "http://2.56.96.225:6900"
+VIDEO_API_URL = "https://api.video.thequickearn.xyz"
+API_KEY = "180DxNexGenBotsl8EE37"
 
 
 def cookie_txt_file():
@@ -40,7 +43,7 @@ async def download_song(link: str):
             #print(f"File already exists: {file_path}")
             return file_path
         
-    song_url = f"{API_URL}/song/{video_id}?api={API_KEY}"
+    song_url = f"{API_URL}/audio?song={video_id}"
     async with aiohttp.ClientSession() as session:
         for attempt in range(10):
             try:
@@ -248,8 +251,11 @@ class YouTubeAPI:
                         return entity.url
         if offset in (None,):
             return None
-        return text[offset : offset + length]
-
+        umm = text[offset : offset + length]
+        if "?si=" in umm:
+            umm = umm.split("?si=")[0].split("&si=")[0]
+        return umm
+        
     async def details(self, link: str, videoid: Union[bool, str] = None):
         if videoid:
             link = self.base + link
@@ -596,4 +602,3 @@ class YouTubeAPI:
             direct = True
             downloaded_file = await download_song(link)
         return downloaded_file, direct
-
