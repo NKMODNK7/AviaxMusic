@@ -36,12 +36,12 @@ async def mongo_check_command(client, message: Message):
             await message.reply(f"The database list is too long to send here. You can view it at: {paste_url}")
         else:
             await ok.delete()
-            result += f"\ná´á´É´É¢á´á´…Ê™ á´…á´€á´›á´€Ê™á´€êœ±á´‡ Ê™Ê : @itsambots"
+            result += f"\nᴍᴏɴɢᴏᴅʙ ᴅᴀᴛᴀʙᴀꜱᴇ ʙʏ : @AMBOTYT"
             await message.reply(result)
         mongo_client.close()
 
     except Exception as AbhiModszYT:
-        await message.reply(f"Failed to connect to MongoDB\n\nYour Mongodb is deadâŒ\n\nError:- <code>{AbhiModszYT}</code>")
+        await message.reply(f"Failed to connect to MongoDB\n\nYour Mongodb is dead❌\n\nError:- <code>{AbhiModszYT}</code>")
 def delete_collection(client, db_name, col_name):
     db = client[db_name]
     db.drop_collection(col_name)
@@ -73,10 +73,10 @@ async def delete_db_command(client, message: Message):
                         result += f"<code>{num}</code>.) <code>{col_name}</code>\n"
                     else:
                         result += f"\n<code>{num}</code>.) <code>{db_name}</code> (Database)\n"
-                result += f"\ná´á´É´É¢á´á´…Ê™ á´…á´€á´›á´€Ê™á´€êœ±á´‡ Ê™Ê : @itsambots"
+                result += f"\nᴍᴏɴɢᴏᴅʙ ᴅᴀᴛᴀʙᴀꜱᴇ ʙʏ : @AMBOTYT"
                 ok = await message.reply(result)
             else:
-                await message.reply("No user databases found. âŒ")
+                await message.reply("No user databases found. ❌")
         elif "," in message.command[1]:
             numbers = message.command[1].split(",")
             failed = []
@@ -89,11 +89,11 @@ async def delete_db_command(client, message: Message):
                         try:
                             if col_name:
                                 delete_collection(mongo_client, db_name, col_name)
-                                await message.reply(f"Collection <code>{col_name}</code> in database <code>{db_name}</code> has been deleted successfully. ðŸ§¹\n\nCheck Rest databse by: /checkdb, /deldb")
+                                await message.reply(f"Collection <code>{col_name}</code> in database <code>{db_name}</code> has been deleted successfully. 🧹\n\nCheck Rest databse by: /checkdb, /deldb")
                                 await ok.delete()
                             else:
                                 delete_database(mongo_client, db_name)
-                                await message.reply(f"Database <code>{db_name}</code> has been deleted successfully. ðŸ§¹\n\nCheck Rest databse by: /checkdb, /deldb")
+                                await message.reply(f"Database <code>{db_name}</code> has been deleted successfully. 🧹\n\nCheck Rest databse by: /checkdb, /deldb")
                                 await ok.delete()
                         except Exception as AbhiModszYT:
                             failed.append(num_str)
@@ -102,17 +102,17 @@ async def delete_db_command(client, message: Message):
                 else:
                     failed.append(num_str)
             if failed:
-                await message.reply(f"Some entries could not be deleted or were invalid: {', '.join(failed)} âŒ\n\nCheck Rest databse by: /checkdb, /deldb")
+                await message.reply(f"Some entries could not be deleted or were invalid: {', '.join(failed)} ❌\n\nCheck Rest databse by: /checkdb, /deldb")
         elif message.command[1].isdigit():
             number = int(message.command[1])
             if number > 0 and number <= len(databases_and_collections):
                 num, db_name, col_name = databases_and_collections[number - 1]
                 if col_name:
                     delete_collection(mongo_client, db_name, col_name)
-                    await message.reply(f"Collection <code>{col_name}</code> in database <code>{db_name}</code> has been deleted successfully. ðŸ§¹\n\nCheck Rest databse by: /checkdb, /deldb")
+                    await message.reply(f"Collection <code>{col_name}</code> in database <code>{db_name}</code> has been deleted successfully. 🧹\n\nCheck Rest databse by: /checkdb, /deldb")
                 else:
                     delete_database(mongo_client, db_name)
-                    await message.reply(f"Database <code>{db_name}</code> has been deleted successfully. ðŸ§¹\n\nCheck Rest databse by: /checkdb, /deldb")
+                    await message.reply(f"Database <code>{db_name}</code> has been deleted successfully. 🧹\n\nCheck Rest databse by: /checkdb, /deldb")
             else:
                 await message.reply("Invalid number. Please check the list again.")
         else:
@@ -121,15 +121,15 @@ async def delete_db_command(client, message: Message):
                 col_name = message.command[2]
                 if db_name in [db[1] for db in databases_and_collections if not db[2]]:
                     delete_collection(mongo_client, db_name, col_name)
-                    await message.reply(f"Collection <code>{col_name}</code> in database <code>{db_name}</code> has been deleted successfully. ðŸ§¹\n\nCheck Rest databse by: /checkdb, /deldb")
+                    await message.reply(f"Collection <code>{col_name}</code> in database <code>{db_name}</code> has been deleted successfully. 🧹\n\nCheck Rest databse by: /checkdb, /deldb")
                 else:
-                    await message.reply(f"Database <code>{db_name}</code> does not exist. âŒ")
+                    await message.reply(f"Database <code>{db_name}</code> does not exist. ❌")
             else:
                 if db_name in [db[1] for db in databases_and_collections if not db[2]]:
                     delete_database(mongo_client, db_name)
-                    await message.reply(f"Database <code>{db_name}</code> has been deleted successfully. ðŸ§¹\n\nCheck Rest databse by: /checkdb, /deldb")
+                    await message.reply(f"Database <code>{db_name}</code> has been deleted successfully. 🧹\n\nCheck Rest databse by: /checkdb, /deldb")
                 else:
-                    await message.reply(f"Database <code>{db_name}</code> does not exist. âŒ")
+                    await message.reply(f"Database <code>{db_name}</code> does not exist. ❌")
         mongo_client.close()
     except Exception as AbhiModszYT:
         await message.reply(f"Failed to delete databases Try to delete by count")
@@ -159,11 +159,11 @@ async def check_db_command(client, message: Message):
                 await ok.delete()
             else:
                 await ok.delete()
-                result += f"\ná´á´É´É¢á´á´…Ê™ á´…á´€á´›á´€Ê™á´€êœ±á´‡ Ê™Ê : @itsambots"
+                result += f"\nᴍᴏɴɢᴏᴅʙ ᴅᴀᴛᴀʙᴀꜱᴇ ʙʏ : @AMBOTYT"
                 await message.reply(result)
         else:
             await ok.delete()
-            await message.reply("No user databases found. âŒ")
+            await message.reply("No user databases found. ❌")
         mongo_client.close()
 
     except Exception as AbhiModszYT:
@@ -212,7 +212,7 @@ async def transfer_db_command(client, message: Message):
             return
 
         if not re.match(mongo_url_pattern, target_mongo_url):
-            await message.reply("The target MongoDB URL format is invalid! âŒ")
+            await message.reply("The target MongoDB URL format is invalid! ❌")
             return
         main_client = MongoClient(main_mongo_url, serverSelectionTimeoutMS=5000)
         backup_data = backup_old_mongo_data(main_client)
@@ -220,7 +220,7 @@ async def transfer_db_command(client, message: Message):
         target_client = MongoClient(target_mongo_url, serverSelectionTimeoutMS=5000)
         restore_data_to_new_mongo(target_client, backup_data)
         target_client.close()
-        await message.reply("Data transfer to the new MongoDB is successful! ðŸŽ‰")
+        await message.reply("Data transfer to the new MongoDB is successful! 🎉")
     except Exception as AbhiModszYT:
         await message.reply(f"Data transfer failed: code>{AbhiModszYT}</code>")
         
@@ -245,7 +245,7 @@ async def download_data_command(client, message: Message):
         json_data = json.dumps(data, default=str, indent=2)
         file = io.BytesIO(json_data.encode('utf-8'))
         file.name = "ambot.json"
-        AMBOTFIRE = f"á´á´É´É¢á´á´…Ê™ á´…á´€á´›á´€Ê™á´€êœ±á´‡ Ê™á´€á´„á´‹á´œá´˜ Ê™Ê : @itsambots"
+        AMBOTFIRE = f"ᴍᴏɴɢᴏᴅʙ ᴅᴀᴛᴀʙᴀꜱᴇ ʙᴀᴄᴋᴜᴘ ʙʏ : @AMBOTYT"
         await client.send_document(chat_id=message.chat.id, document=file, caption=AMBOTFIRE)
     except Exception as AbhiModszYT:
         await message.reply(f"Failed to download data: <code>{AbhiModszYT}</code>")
@@ -256,15 +256,15 @@ async def download_data_command(client, message: Message):
     try:
         mongo_url = message.command[1]
         mongo_url2 = message.command[2]
-        await am.edit("á´„á´É´É´á´‡á´„á´›ÉªÉ´É¢ á´É´ Êá´á´œÊ€ á´á´€ÉªÉ´ á´á´É´É¢á´á´…Ê™...")
+        await am.edit("ᴄᴏɴɴᴇᴄᴛɪɴɢ ᴏɴ ʏᴏᴜʀ ᴍᴀɪɴ ᴍᴏɴɢᴏᴅʙ...")
         mongo_client = MongoClient(mongo_url, serverSelectionTimeoutMS=5000)
-        await am.edit("á´„á´É´É´á´‡á´„á´›á´‡á´… á´É´ Êá´á´œÊ€ á´á´€ÉªÉ´ á´á´É´É¢á´á´…Ê™ âœ…\ná´„á´á´á´˜ÊŸá´‡á´›á´‡ á´á´É´É¢á´á´…Ê™ á´…á´€á´›á´€Ê™á´€êœ±á´‡ Ê™Ê : @itsambots")
+        await am.edit("ᴄᴏɴɴᴇᴄᴛᴇᴅ ᴏɴ ʏᴏᴜʀ ᴍᴀɪɴ ᴍᴏɴɢᴏᴅʙ ✅\nᴄᴏᴍᴘʟᴇᴛᴇ ᴍᴏɴɢᴏᴅʙ ᴅᴀᴛᴀʙᴀꜱᴇ ʙʏ : @AMBOTYT")
         await asyncio.sleep(3)
-        await am.edit("á´„á´É´É´á´‡á´„á´›ÉªÉ´É¢ á´É´ Êá´á´œÊ€ É´á´‡á´¡ á´á´É´É¢á´á´…Ê™....")
+        await am.edit("ᴄᴏɴɴᴇᴄᴛɪɴɢ ᴏɴ ʏᴏᴜʀ ɴᴇᴡ ᴍᴏɴɢᴏᴅʙ....")
         mongo_client2 = MongoClient(mongo_url2, serverSelectionTimeoutMS=5000)
-        await am.edit("á´„á´É´É´á´‡á´„á´›ÉªÉ´É¢ á´É´ Êá´á´œÊ€ É´á´‡á´¡ á´á´É´É¢á´á´…Ê™ âœ…\ná´„á´á´á´˜ÊŸá´‡á´›á´‡ á´á´É´É¢á´á´…Ê™ á´…á´€á´›á´€Ê™á´€êœ±á´‡ Ê™Ê : @itsambots")
+        await am.edit("ᴄᴏɴɴᴇᴄᴛɪɴɢ ᴏɴ ʏᴏᴜʀ ɴᴇᴡ ᴍᴏɴɢᴏᴅʙ ✅\nᴄᴏᴍᴘʟᴇᴛᴇ ᴍᴏɴɢᴏᴅʙ ᴅᴀᴛᴀʙᴀꜱᴇ ʙʏ : @AMBOTYT")
         await asyncio.sleep(3)
-        await am.edit("êœ±á´›á´€Ê€á´›á´‡á´… á´›á´ Ê™á´€á´„á´‹-á´œá´˜ á´á´€ÉªÉ´ á´á´É´É¢á´....\nÉªá´›'êœ± á´›á´€á´‹á´‡ á´›Éªá´á´‡ Ê™á´€êœ±á´‡ á´É´ Êá´á´œÊ€ á´…á´€á´›á´€ êœ±á´›á´Ê€á´€É¢á´‡ êœ±Éªá´¢á´‡\n\ná´˜ÊŸá´‡á´€êœ±á´‡ á´¡á´€Éªá´›.....")
+        await am.edit("ꜱᴛᴀʀᴛᴇᴅ ᴛᴏ ʙᴀᴄᴋ-ᴜᴘ ᴍᴀɪɴ ᴍᴏɴɢᴏ....\nɪᴛ'ꜱ ᴛᴀᴋᴇ ᴛɪᴍᴇ ʙᴀꜱᴇ ᴏɴ ʏᴏᴜʀ ᴅᴀᴛᴀ ꜱᴛᴏʀᴀɢᴇ ꜱɪᴢᴇ\n\nᴘʟᴇᴀꜱᴇ ᴡᴀɪᴛ.....")
         data = {}
         for db_name in mongo_client.list_database_names():
             if db_name not in ["local", "admin", "config","sample_mflix"]:
@@ -273,11 +273,11 @@ async def download_data_command(client, message: Message):
                 for col_name in db.list_collection_names():
                     data[db_name][col_name] = list(db[col_name].find())
         mongo_client.close()
-        await am.edit("Ê™á´€á´„á´‹-á´œá´˜ á´„á´á´á´˜ÊŸá´‡á´›á´‡ á´É´ á´á´€ÉªÉ´ á´á´É´É¢á´ âœ…\ná´„á´á´á´˜ÊŸá´‡á´›á´‡ á´á´É´É¢á´á´…Ê™ á´…á´€á´›á´€Ê™á´€êœ±á´‡ Ê™Ê : @itsambots")
+        await am.edit("ʙᴀᴄᴋ-ᴜᴘ ᴄᴏᴍᴘʟᴇᴛᴇ ᴏɴ ᴍᴀɪɴ ᴍᴏɴɢᴏ ✅\nᴄᴏᴍᴘʟᴇᴛᴇ ᴍᴏɴɢᴏᴅʙ ᴅᴀᴛᴀʙᴀꜱᴇ ʙʏ : @AMBOTYT")
         json_data = json.dumps(data, default=str, indent=2)
         backup_data = io.BytesIO(json_data.encode('utf-8'))
         backup_data.name = "ambot.json"
-        await am.edit("Ê™á´€á´„á´‹-á´œá´˜ êœ°ÉªÊŸá´‡ Ê€á´‡á´œá´˜ÊŸá´á´€á´…ÉªÉ´É¢ á´É´ É´á´‡á´¡ á´á´É´É¢á´...\nÉªá´›'êœ± á´›á´€á´‹á´‡ á´›Éªá´á´‡ Ê™á´€êœ±á´‡ á´É´ Êá´á´œÊ€ á´…á´€á´›á´€ êœ±á´›á´Ê€á´€É¢á´‡ êœ±Éªá´¢á´‡\n\ná´˜ÊŸá´‡á´€êœ±á´‡ á´¡á´€Éªá´›.....")
+        await am.edit("ʙᴀᴄᴋ-ᴜᴘ ꜰɪʟᴇ ʀᴇᴜᴘʟᴏᴀᴅɪɴɢ ᴏɴ ɴᴇᴡ ᴍᴏɴɢᴏ...\nɪᴛ'ꜱ ᴛᴀᴋᴇ ᴛɪᴍᴇ ʙᴀꜱᴇ ᴏɴ ʏᴏᴜʀ ᴅᴀᴛᴀ ꜱᴛᴏʀᴀɢᴇ ꜱɪᴢᴇ\n\nᴘʟᴇᴀꜱᴇ ᴡᴀɪᴛ.....")
         backup_data.seek(0)
         data_to_restore = json.load(backup_data)
         await restore_data_to_new_mongo(mongo_client2, data_to_restore)
@@ -285,10 +285,10 @@ async def download_data_command(client, message: Message):
         backup_data.close()
         del backup_data
         gc.collect()
-        await am.edit("Ê™á´€á´„á´‹-á´œá´˜ êœ°ÉªÊŸá´‡ Ê€á´‡á´œá´˜ÊŸá´á´€á´…ÉªÉ´É¢ á´„á´á´á´˜ÊŸá´‡á´›á´‡ á´É´ É´á´‡á´¡ á´á´É´É¢á´ á´¡á´€Éªá´› á´„Êœá´‡á´„á´‹á´‹ÉªÉ´É¢ á´…Ê™ ÊŸá´á´€á´… êœ±á´œá´˜á´˜á´Ê€á´› âœ…\ná´„á´á´á´˜ÊŸá´‡á´›á´‡ á´á´É´É¢á´á´…Ê™ á´…á´€á´›á´€Ê™á´€êœ±á´‡ Ê™Ê : @itsambots")
+        await am.edit("ʙᴀᴄᴋ-ᴜᴘ ꜰɪʟᴇ ʀᴇᴜᴘʟᴏᴀᴅɪɴɢ ᴄᴏᴍᴘʟᴇᴛᴇ ᴏɴ ɴᴇᴡ ᴍᴏɴɢᴏ ᴡᴀɪᴛ ᴄʜᴇᴄᴋᴋɪɴɢ ᴅʙ ʟᴏᴀᴅ ꜱᴜᴘᴘᴏʀᴛ ✅\nᴄᴏᴍᴘʟᴇᴛᴇ ᴍᴏɴɢᴏᴅʙ ᴅᴀᴛᴀʙᴀꜱᴇ ʙʏ : @AMBOTYT")
     except Exception as AbhiModszYT:
         pass
-    await am.edit("á´¡Éªá´›Êœá´á´œá´› á´€É´Ê á´˜Ê€á´Ê™ÊŸá´‡á´ Ê€á´‡á´œá´˜ÊŸá´á´€á´… á´›á´€êœ±á´‹ á´„á´á´á´˜ÊŸá´‡á´›á´‡ âœ…\ná´„á´á´á´˜ÊŸá´‡á´›á´‡ á´á´É´É¢á´á´…Ê™ á´…á´€á´›á´€Ê™á´€êœ±á´‡ Ê™Ê : @itsambots")
+    await am.edit("ᴡɪᴛʜᴏᴜᴛ ᴀɴʏ ᴘʀᴏʙʟᴇᴍ ʀᴇᴜᴘʟᴏᴀᴅ ᴛᴀꜱᴋ ᴄᴏᴍᴘʟᴇᴛᴇ ✅\nᴄᴏᴍᴘʟᴇᴛᴇ ᴍᴏɴɢᴏᴅʙ ᴅᴀᴛᴀʙᴀꜱᴇ ʙʏ : @AMBOTYT")
 
 
 MONGO_DB_URI = os.getenv("MONGO_DB_URI")
@@ -298,54 +298,54 @@ async def download_data_command(client, message: Message):
     am = await message.reply("Hmmmm............") 
     try:
         if not message.reply_to_message or not message.reply_to_message.document:
-            await am.edit("á´˜ÊŸêœ± Ê€á´‡á´˜ÊŸÊ á´›á´ á´Šêœ±á´É´ êœ°ÉªÊŸá´‡ êœ°á´Ê€ á´œá´˜ÊŸá´á´€á´… á´…á´€á´›á´€Ê™á´€êœ±á´‡ á´œêœ±á´‡ ÊŸÉªá´‹á´‡ : /á´œá´˜ÊŸá´á´€á´… Ê€á´‡á´˜ÊŸÊ_á´Šêœ±á´É´_êœ°ÉªÊŸá´‡ á´á´É´É¢á´_á´…Ê™...")
+            await am.edit("ᴘʟꜱ ʀᴇᴘʟʏ ᴛᴏ ᴊꜱᴏɴ ꜰɪʟᴇ ꜰᴏʀ ᴜᴘʟᴏᴀᴅ ᴅᴀᴛᴀʙᴀꜱᴇ ᴜꜱᴇ ʟɪᴋᴇ : /ᴜᴘʟᴏᴀᴅ ʀᴇᴘʟʏ_ᴊꜱᴏɴ_ꜰɪʟᴇ ᴍᴏɴɢᴏ_ᴅʙ...")
             return
         mongo_url = message.command[1] 
         replyfile = message.reply_to_message.document
         file_name = replyfile.file_name
         file_id = replyfile.file_id
         if not file_name.endswith(".json"):
-            await am.edit("á´É´ÊŸÊ .á´Šêœ±á´É´ êœ°ÉªÊŸá´‡êœ± á´€Ê€á´‡ êœ±á´œá´˜á´˜á´Ê€á´›á´‡á´….")
+            await am.edit("ᴏɴʟʏ .ᴊꜱᴏɴ ꜰɪʟᴇꜱ ᴀʀᴇ ꜱᴜᴘᴘᴏʀᴛᴇᴅ.")
             return
         download_path = os.path.join("mongodb", file_name)
-        await am.edit("á´…á´á´¡É´ÊŸá´á´€á´…ÉªÉ´É¢ á´›Êœá´‡ êœ°ÉªÊŸá´‡ á´¡á´€Éªá´›....\nÉªá´›'êœ± á´›á´€á´‹á´‡ á´›Éªá´á´‡ Ê™á´€êœ±á´‡ á´É´ Êá´á´œÊ€ á´…á´€á´›á´€ êœ±á´›á´Ê€á´€É¢á´‡ êœ±Éªá´¢á´‡\n\ná´˜ÊŸá´‡á´€êœ±á´‡ á´¡á´€Éªá´›.....") 
+        await am.edit("ᴅᴏᴡɴʟᴏᴀᴅɪɴɢ ᴛʜᴇ ꜰɪʟᴇ ᴡᴀɪᴛ....\nɪᴛ'ꜱ ᴛᴀᴋᴇ ᴛɪᴍᴇ ʙᴀꜱᴇ ᴏɴ ʏᴏᴜʀ ᴅᴀᴛᴀ ꜱᴛᴏʀᴀɢᴇ ꜱɪᴢᴇ\n\nᴘʟᴇᴀꜱᴇ ᴡᴀɪᴛ.....") 
         backup_data = await client.download_media(file_id, download_path)
-        await am.edit("êœ°ÉªÊŸá´‡ á´…á´á´¡É´ÊŸá´á´€á´…á´‡á´… êœ±á´œá´„á´„á´‡êœ±êœ±êœ°á´œÊŸÊŸÊ. á´¡á´€Éªá´› êœ°á´Ê€ á´œá´˜ÊŸá´á´€á´… á´…á´€á´›á´€...") 
+        await am.edit("ꜰɪʟᴇ ᴅᴏᴡɴʟᴏᴀᴅᴇᴅ ꜱᴜᴄᴄᴇꜱꜱꜰᴜʟʟʏ. ᴡᴀɪᴛ ꜰᴏʀ ᴜᴘʟᴏᴀᴅ ᴅᴀᴛᴀ...") 
         target_client = MongoClient(mongo_url, serverSelectionTimeoutMS=5000)
         with open(backup_data, 'r') as file:
             data = json.load(file)
         restore_data_to_new_mongo(target_client, data)
         target_client.close()
-        await am.edit("êœ°ÉªÊŸá´‡ á´…á´€á´›á´€ Êœá´€êœ± Ê™á´‡á´‡É´ á´˜Ê€á´á´„á´‡êœ±êœ±á´‡á´… êœ±á´œá´„á´„á´‡êœ±êœ±êœ°á´œÊŸÊŸÊ âœ….\ná´›á´€êœ±á´‹ á´„á´á´á´˜ÊŸá´‡á´›á´‡ á´á´É´É¢á´á´…Ê™ á´…á´€á´›á´€Ê™á´€êœ±á´‡ Ê™Ê : @itsambots")
+        await am.edit("ꜰɪʟᴇ ᴅᴀᴛᴀ ʜᴀꜱ ʙᴇᴇɴ ᴘʀᴏᴄᴇꜱꜱᴇᴅ ꜱᴜᴄᴄᴇꜱꜱꜰᴜʟʟʏ ✅.\nᴛᴀꜱᴋ ᴄᴏᴍᴘʟᴇᴛᴇ ᴍᴏɴɢᴏᴅʙ ᴅᴀᴛᴀʙᴀꜱᴇ ʙʏ : @AMBOTYT")
     except Exception as AbhiModszYT:
-        await am.edit(f"á´€É´ á´‡Ê€Ê€á´Ê€ á´á´„á´„á´œÊ€Ê€á´‡á´…: {str(AbhiModszYT)}")
+        await am.edit(f"ᴀɴ ᴇʀʀᴏʀ ᴏᴄᴄᴜʀʀᴇᴅ: {str(AbhiModszYT)}")
 
 @app.on_message(filters.command(["mongo", "mongodb"], prefixes=["/", "!"]))
 async def rulses(client, message: Message):
-    RULSE = f"""Êœá´‡Ê,
-MongoDB Management  á´„á´á´á´á´€É´á´… :
+    RULSE = f"""ʜᴇʏ,
+MongoDB Management  ᴄᴏᴍᴍᴀɴᴅ :
 
-â€¢ /deletedb : You can delete by /deletedb 1,2,7,5.
+• /deletedb : You can delete by /deletedb 1,2,7,5.
 
-â€¢ /deletedb [database_name] [collection_name]: Deletes the specified collection within the database.
+• /deletedb [database_name] [collection_name]: Deletes the specified collection within the database.
 
-â€¢ /deletedb all: Deletes all user databases.
+• /deletedb all: Deletes all user databases.
 
-â€¢ /checkdb: Lists all databases and collections with the number of documents in the MongoDB.
+• /checkdb: Lists all databases and collections with the number of documents in the MongoDB.
 
-â€¢ MongoDB Transfer Commands:
+• MongoDB Transfer Commands:
 
-â€¢ /transferdb [new_mongo_url]: - Transfers all databases from the old MongoDB (from environment) to the new MongoDB URL.
+• /transferdb [new_mongo_url]: - Transfers all databases from the old MongoDB (from environment) to the new MongoDB URL.
 
-â€¢ /downloaddata - Download your all data from database in a document file.
+• /downloaddata - Download your all data from database in a document file.
 
-â€¢ /mongochk [MongoDB_URL]: Verifies the given MongoDB URL and lists all databases and collections in it.
+• /mongochk [MongoDB_URL]: Verifies the given MongoDB URL and lists all databases and collections in it.
 
-â€¢ /upload : Upload json file in new database use like : /upload reply_to_json_file MONGODB_URL
+• /upload : Upload json file in new database use like : /upload reply_to_json_file MONGODB_URL
 
-â€¢ /reupload : rebackup mongo direct mongo to mongo data back-up use like : /reupload Main_MONGO NEW_MONGO
+• /reupload : rebackup mongo direct mongo to mongo data back-up use like : /reupload Main_MONGO NEW_MONGO
 
-â€¢ Users Cmds : /reupload  /upload /mongochk /downloaddata
+• Users Cmds : /reupload  /upload /mongochk /downloaddata
 """
     await message.delete()
     await message.reply(RULSE)
