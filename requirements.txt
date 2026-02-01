@@ -10,7 +10,7 @@ httpx
 motor
 numpy
 opencv-python
-pillow==9.5.0
+pillow
 psutil
 py-tgcalls==0.9.7
 pytgcrypto
@@ -26,6 +26,7 @@ yt-dlp
 youtube-search
 youtube-search-python
 py-yt-search
+
 
 
 
