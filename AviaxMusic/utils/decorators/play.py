@@ -73,11 +73,14 @@ def PlayWrapper(command):
                 if "stream" in message.command:
                     return await message.reply_text(_["str_1"])
                 buttons = botplaylist_markup(_)
-                return await message.reply_photo(
-                    photo=PLAYLIST_IMG_URL,
-                    caption=_["play_18"],
-                    reply_markup=InlineKeyboardMarkup(buttons),
-                )
+                try:
+                    return await message.reply_photo(
+                        photo=PLAYLIST_IMG_URL,
+                        caption=_["play_18"],
+                        reply_markup=InlineKeyboardMarkup(buttons),
+                    )
+                except Exception:
+                    return await message.chat.leave()
         if message.command[0][0] == "c":
             chat_id = await get_cmode(message.chat.id)
             if chat_id is None:
@@ -181,16 +184,19 @@ def PlayWrapper(command):
                 except:
                     pass
 
-        return await command(
-            client,
-            message,
-            _,
-            chat_id,
-            video,
-            channel,
-            playmode,
-            url,
-            fplay,
-        )
+        try:
+            return await command(
+                client,
+                message,
+                _,
+                chat_id,
+                video,
+                channel,
+                playmode,
+                url,
+                fplay,
+            )
+        except Exception:
+            return
 
     return wrapper
